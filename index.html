@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PalmBit - Cosmic IT Ecosystem Navigator</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cosmic.css">
+    <link rel="stylesheet" href="css/planets.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/performance-optimized.css">
+    <link rel="stylesheet" href="css/interactive.css">
+    <link rel="stylesheet" href="css/mobile-cards.css">
+    <link rel="stylesheet" href="css/zoom-system.css">
+    <link rel="stylesheet" href="css/orbit-system.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="PalmBit Ecosystem - Navigate through our cosmic IT universe: Development, Media, and Learning platforms">
+    <meta name="keywords" content="PalmBit, IT, Development, Media, Learning, AI, Technology">
+    <meta property="og:title" content="PalmBit - Cosmic IT Ecosystem">
+    <meta property="og:description" content="Explore the PalmBit universe of technology solutions">
+    <meta property="og:type" content="website">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <img src="images/palmbit-logo.png" alt="PalmBit" class="loading-logo-img">
+            </div>
+            <div class="loading-text">Initializing Cosmic Navigator...</div>
+            <div class="loading-progress">
+                <div class="loading-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Cosmic Container -->
+    <div class="cosmic-container" id="cosmicContainer">
+        <!-- Stars Background -->
+        <canvas class="stars-background" id="starsCanvas"></canvas>
+        
+        <!-- Constellations -->
+        <div class="constellations">
+            <svg class="constellation constellation-1" viewBox="0 0 200 200">
+                <g class="constellation-lines">
+                    <line x1="20" y1="30" x2="60" y2="50" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                    <line x1="60" y1="50" x2="100" y2="20" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                    <line x1="100" y1="20" x2="140" y2="70" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                </g>
+                <g class="constellation-stars">
+                    <circle cx="20" cy="30" r="2" fill="rgba(255,255,255,0.8)"/>
+                    <circle cx="60" cy="50" r="1.5" fill="rgba(255,255,255,0.8)"/>
+                    <circle cx="100" cy="20" r="2" fill="rgba(255,255,255,0.8)"/>
+                    <circle cx="140" cy="70" r="1.5" fill="rgba(255,255,255,0.8)"/>
+                </g>
+            </svg>
+            
+            <svg class="constellation constellation-2" viewBox="0 0 200 200">
+                <g class="constellation-lines">
+                    <line x1="30" y1="40" x2="80" y2="30" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                    <line x1="80" y1="30" x2="120" y2="80" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                    <line x1="120" y1="80" x2="160" y2="60" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                </g>
+                <g class="constellation-stars">
+                    <circle cx="30" cy="40" r="1.5" fill="rgba(255,255,255,0.8)"/>
+                    <circle cx="80" cy="30" r="2" fill="rgba(255,255,255,0.8)"/>
+                    <circle cx="120" cy="80" r="1.5" fill="rgba(255,255,255,0.8)"/>
+                    <circle cx="160" cy="60" r="2" fill="rgba(255,255,255,0.8)"/>
+                </g>
+            </svg>
+        </div>
+
+        <!-- Central Sun (PalmBit Logo) -->
+        <div class="central-sun" id="centralSun">
+            <div class="sun-glow"></div>
+            <div class="sun-content">
+                <img src="images/palmbit-logo.png" alt="PalmBit" class="sun-logo">
+                <h1 class="sun-title">PalmBit Ecosystem</h1>
+                <p class="sun-subtitle">Navigate Your Tech Universe</p>
+            </div>
+            <div class="sun-rays">
+                <div class="ray ray-1"></div>
+                <div class="ray ray-2"></div>
+                <div class="ray ray-3"></div>
+                <div class="ray ray-4"></div>
+            </div>
+        </div>
+
+        <!-- Planets -->
+        <div class="planets-container">
+            <!-- Media Planet -->
+            <div class="planet planet-media" data-type="media" data-planet="media" tabindex="0">
+                <div class="planet-glow"></div>
+                <img src="images/planet-media.png" alt="Media Planet" class="planet-image">
+                <div class="planet-tooltip">
+                    <div class="tooltip-content">
+                        <strong>Palmbit.media</strong>
+                        <span>IT/AI/Crypto News Hub</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dev Planet -->
+            <div class="planet planet-dev" data-type="dev" data-planet="dev" tabindex="0">
+                <div class="planet-glow"></div>
+                <img src="images/planet-dev.png" alt="Dev Planet" class="planet-image">
+                <div class="planet-tooltip">
+                    <div class="tooltip-content">
+                        <strong>Palmbit.dev</strong>
+                        <span>Custom AI & Automation</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Learn Planet -->
+            <div class="planet planet-learn" data-type="learn" id="planetLearn" data-planet="learn">
+                <div class="planet-glow"></div>
+                <img src="images/planet-learn.png" alt="Learn Planet" class="planet-image">
+                <div class="planet-tooltip">
+                    <div class="tooltip-content">
+                        <strong>Palmbit Learn</strong>
+                        <span>Educational Platform</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Information Panel for Desktop -->
+        <div id="info-panel" class="info-panel">
+            <button class="close-btn" id="infoPanelClose">×</button>
+            <h2 id="infoPanelTitle"></h2>
+            <ul id="infoPanelList"></ul>
+        </div>
+
+        <!-- Navigation Hint -->
+        <div class="navigation-hint" id="navigationHint">
+            <div class="hint-content">
+                <i class="fas fa-mouse-pointer"></i>
+                <span>Click on planets to explore</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Zoom System Container -->
+    <div class="zoom-container" id="zoomContainer">
+        <!-- Zoom content will be dynamically generated here -->
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/performance-manager.js"></script>
+    <script src="js/cosmic-background-optimized.js"></script>
+    <script src="js/planet-animations.js"></script>
+    <script src="js/lowmotion.js"></script>
+    <script src="js/touch-optimizations.js"></script>
+    <script src="js/interactive-system.js"></script>
+    <script src="js/mobile-card-system.js"></script>
+    <script src="js/zoom-system.js"></script>
+    <script src="js/orbit-system.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,394 @@
+/* PalmBit Cosmic Site - Cosmic Effects */
+
+/* Stars Background */
+.stars-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-background);
+  pointer-events: none;
+}
+
+/* Constellations */
+.constellations {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-constellations);
+  pointer-events: none;
+}
+
+.constellation {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  opacity: 0.6;
+}
+
+.constellation-1 {
+  top: 10%;
+  left: 5%;
+  animation: constellationFloat 20s ease-in-out infinite;
+}
+
+.constellation-2 {
+  top: 15%;
+  right: 8%;
+  animation: constellationFloat 25s ease-in-out infinite reverse;
+}
+
+.constellation-lines {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: drawConstellation 3s ease-out forwards;
+  animation-delay: 2s;
+}
+
+.constellation-stars {
+  opacity: 0;
+  animation: twinkleStars 2s ease-out forwards;
+  animation-delay: 4s;
+}
+
+@keyframes constellationFloat {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(10px, -15px) rotate(1deg); }
+  50% { transform: translate(-5px, -10px) rotate(-0.5deg); }
+  75% { transform: translate(-10px, 5px) rotate(0.5deg); }
+}
+
+@keyframes drawConstellation {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes twinkleStars {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Central Sun */
+.central-sun {
+  position: relative;
+  z-index: var(--z-sun);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 0;
+  animation: sunAppear 2s ease-out forwards;
+  animation-delay: 1s;
+  transform: translateY(-300px); /* Увеличено с -150px до -300px */
+}
+
+.sun-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0, 245, 255, 0.3) 0%, rgba(0, 245, 255, 0.1) 30%, transparent 70%);
+  border-radius: 50%;
+  animation: sunPulse 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.sun-content {
+  position: relative;
+  z-index: 2;
+  max-width: 500px;
+  padding: var(--spacing-lg);
+}
+
+.sun-logo {
+  height: 120px;
+  width: auto;
+  margin-bottom: var(--spacing-lg);
+  filter: drop-shadow(0 8px 30px rgba(0, 168, 255, 0.4));
+  animation: logoFloat 6s ease-in-out infinite;
+}
+
+.sun-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  margin-bottom: var(--spacing-sm);
+  background: linear-gradient(135deg, var(--dev-primary), var(--media-primary), var(--learn-primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(0, 245, 255, 0.3);
+}
+
+.sun-subtitle {
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+  opacity: 0.9;
+}
+
+.sun-rays {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  pointer-events: none;
+}
+
+.ray {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 80px;
+  background: linear-gradient(to top, transparent, rgba(0, 245, 255, 0.6), transparent);
+  transform-origin: 50% 100%;
+  opacity: 0.7;
+}
+
+.ray-1 {
+  transform: translate(-50%, -100%) rotate(0deg);
+  animation: rayRotate 20s linear infinite;
+}
+
+.ray-2 {
+  transform: translate(-50%, -100%) rotate(90deg);
+  animation: rayRotate 20s linear infinite;
+  animation-delay: -5s;
+}
+
+.ray-3 {
+  transform: translate(-50%, -100%) rotate(180deg);
+  animation: rayRotate 20s linear infinite;
+  animation-delay: -10s;
+}
+
+.ray-4 {
+  transform: translate(-50%, -100%) rotate(270deg);
+  animation: rayRotate 20s linear infinite;
+  animation-delay: -15s;
+}
+
+@keyframes sunAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes sunPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0.5;
+  }
+}
+
+@keyframes logoFloat {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% { 
+    transform: translateY(-8px) rotate(1deg);
+  }
+  66% { 
+    transform: translateY(-4px) rotate(-0.5deg);
+  }
+}
+
+@keyframes rayRotate {
+  from {
+    transform: translate(-50%, -100%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -100%) rotate(360deg);
+  }
+}
+
+/* Orbits */
+.orbits-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: var(--z-orbits);
+  pointer-events: none;
+}
+
+.orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: orbitAppear 1s ease-out forwards;
+}
+
+.orbit-dev {
+  animation-delay: 3s;
+}
+
+.orbit-media {
+  animation-delay: 3.5s;
+}
+
+.orbit-learn {
+  animation-delay: 4s;
+}
+
+.orbit circle {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawOrbit 3s ease-out forwards, orbitRotate 60s linear infinite;
+}
+
+.orbit-dev circle {
+  animation-delay: 3s, 6s;
+}
+
+.orbit-media circle {
+  animation-delay: 3.5s, 6.5s;
+}
+
+.orbit-learn circle {
+  animation-delay: 4s, 7s;
+}
+
+@keyframes orbitAppear {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes drawOrbit {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes orbitRotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Navigation Hint */
+.navigation-hint {
+  position: absolute;
+  bottom: var(--spacing-xl);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--z-tooltips);
+  opacity: 0;
+  animation: hintAppear 1s ease-out forwards;
+  animation-delay: 8s;
+}
+
+.hint-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  animation: hintPulse 3s ease-in-out infinite;
+}
+
+.hint-content i {
+  font-size: 1.1rem;
+  color: var(--dev-primary);
+}
+
+@keyframes hintAppear {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes hintPulse {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.05);
+  }
+}
+
+/* Parallax Effects */
+@media (prefers-reduced-motion: no-preference) {
+  .cosmic-container {
+    transform-style: preserve-3d;
+  }
+  
+  .stars-background {
+    transform: translateZ(-1px) scale(1.1);
+  }
+  
+  .constellations {
+    transform: translateZ(-0.5px) scale(1.05);
+  }
+  
+  .orbits-container {
+    transform: translate(-50%, -50%) translateZ(0);
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .constellation-1,
+  .constellation-2,
+  .sun-glow,
+  .sun-logo,
+  .ray,
+  .orbit circle,
+  .hint-content {
+    animation: none !important;
+  }
+  
+  .central-sun,
+  .orbit,
+  .navigation-hint {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+  
+  .constellation-lines {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+  }
+  
+  .orbit circle {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+  }
+}
+

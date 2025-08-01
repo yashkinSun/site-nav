@@ -1,0 +1,256 @@
+/**
+ * Performance Optimized Styles
+ * Reduces GPU load and improves mobile performance
+ */
+
+/* Low Motion Mode Styles */
+.low-motion *,
+.low-motion *::before,
+.low-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+.low-motion .orbit,
+.low-motion .stars-bg,
+.low-motion .constellation-lines,
+.low-motion .floating-particles {
+  display: none !important;
+}
+
+.low-motion .planet-glow {
+  filter: none !important;
+  box-shadow: none !important;
+}
+
+.low-motion .cosmic-background {
+  background: linear-gradient(135deg, #0a0a2e 0%, #16213e 50%, #1a1a3a 100%) !important;
+}
+
+/* Keep essential transitions for UX */
+.low-motion .planet {
+  transition: transform 0.2s ease !important;
+}
+
+.low-motion .modal {
+  transition: opacity 0.15s ease, transform 0.15s ease !important;
+}
+
+.low-motion .modal-overlay {
+  transition: opacity 0.15s ease !important;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  /* Remove backdrop-filter on mobile */
+  .modal-overlay {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+  }
+  
+  .modal-content {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(30, 41, 59, 0.95) !important;
+  }
+  
+  /* Simplify planet glows */
+  .planet-glow {
+    filter: none !important;
+    box-shadow: 0 0 20px rgba(74, 158, 255, 0.3) !important;
+  }
+  
+  /* Reduce transform complexity */
+  .planet {
+    will-change: transform;
+    transform: translateZ(0); /* Force hardware acceleration */
+  }
+  
+  /* Simplify animations */
+  .orbit {
+    animation: orbitRotate 60s linear infinite !important;
+  }
+  
+  /* Hide complex visual elements */
+  .constellation-lines,
+  .floating-particles,
+  .stars-container {
+    display: none !important;
+  }
+  
+  /* Optimize modal animations */
+  .modal.show {
+    animation: modalFadeIn 0.2s ease !important;
+  }
+  
+  .modal.hide {
+    animation: modalFadeOut 0.2s ease !important;
+  }
+}
+
+/* Tablet optimizations */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .planet-glow {
+    filter: blur(8px) !important;
+  }
+  
+  .modal-overlay {
+    backdrop-filter: blur(3px) !important;
+    -webkit-backdrop-filter: blur(3px) !important;
+  }
+}
+
+/* Desktop optimizations */
+@media (min-width: 1025px) {
+  .modal-overlay {
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+  }
+  
+  .planet-glow {
+    filter: blur(12px) !important;
+  }
+}
+
+/* Optimized animations */
+@keyframes orbitRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes modalFadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+/* Performance optimizations */
+.planet {
+  contain: layout style paint;
+  will-change: transform;
+}
+
+.modal {
+  contain: layout style paint;
+}
+
+.modal-content {
+  contain: layout style paint;
+}
+
+/* Reduce repaints */
+.orbit {
+  will-change: auto; /* Remove will-change when not needed */
+}
+
+.stars-container {
+  will-change: auto;
+}
+
+/* Touch optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .planet:hover {
+    transform: none !important;
+  }
+  
+  .planet:active {
+    transform: scale(1.05) !important;
+    transition: transform 0.1s ease !important;
+  }
+  
+  /* Larger touch targets */
+  .planet {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  /* Remove hover effects */
+  .planet-tooltip {
+    display: none !important;
+  }
+}
+
+/* Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .orbit {
+    animation: none !important;
+  }
+  
+  .planet {
+    transition: transform 0.2s ease !important;
+  }
+  
+  .modal {
+    transition: opacity 0.15s ease !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .planet {
+    border: 2px solid currentColor;
+  }
+  
+  .modal-content {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Forced colors mode support */
+@media (forced-colors: active) {
+  .planet {
+    forced-color-adjust: none;
+  }
+  
+  .modal-content {
+    forced-color-adjust: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .cosmic-background,
+  .orbit,
+  .planet-glow,
+  .stars-container,
+  .constellation-lines {
+    display: none !important;
+  }
+  
+  .modal {
+    position: static !important;
+    background: white !important;
+    color: black !important;
+  }
+}
+

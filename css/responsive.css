@@ -1,0 +1,692 @@
+/* PalmBit Cosmic Site - Responsive Styles */
+
+/* Tablet Styles */
+@media screen and (max-width: 1199px) {
+  /* Central Sun */
+  .sun-logo {
+    height: 100px;
+  }
+  
+  .sun-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+  
+  .sun-subtitle {
+    font-size: clamp(1rem, 2vw, 1.4rem);
+  }
+  
+  /* Planets */
+  .planet-dev .planet-surface {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .planet-media .planet-surface {
+    width: 110px;
+    height: 110px;
+  }
+  
+  .planet-learn .planet-surface {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .planet-icon {
+    font-size: 2.2rem;
+  }
+  
+  .planet-media .planet-icon {
+    font-size: 2.7rem;
+  }
+  
+  .planet-learn .planet-icon {
+    font-size: 2rem;
+  }
+  
+  /* Tooltips */
+  .planet-tooltip {
+    min-width: 180px;
+  }
+  
+  /* Modal */
+  .modal-content {
+    width: 95%;
+    max-height: 85vh;
+  }
+  
+  .modal-features {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile Landscape */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+  .cosmic-container {
+    min-height: 100vh;
+  }
+  
+  /* Adjust planet positions for landscape */
+  .planet-dev {
+    top: 20%;
+    left: 15%;
+  }
+  
+  .planet-media {
+    top: 25%;
+    right: 10%;
+  }
+  
+  .planet-learn {
+    bottom: 15%;
+    left: 50%;
+  }
+  
+  /* Navigation hint */
+  .navigation-hint {
+    bottom: var(--spacing-lg);
+  }
+  
+  .hint-content {
+    font-size: 0.8rem;
+    padding: var(--spacing-xs) var(--spacing-md);
+  }
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 767px) {
+  /* Base adjustments */
+  :root {
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 2.5rem;
+  }
+  
+  /* Loading screen */
+  .loading-content {
+    padding: var(--spacing-md);
+  }
+  
+  .loading-logo-img {
+    height: 60px;
+  }
+  
+  .loading-text {
+    font-size: 1rem;
+  }
+  
+  /* Central Sun */
+  .central-sun {
+    padding: var(--spacing-md);
+  }
+  
+  .sun-glow {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .sun-content {
+    padding: var(--spacing-md);
+  }
+  
+  .sun-logo {
+    height: 70px;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .sun-title {
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .sun-subtitle {
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
+  }
+  
+  .sun-rays {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .ray {
+    height: 50px;
+  }
+  
+  /* Constellations - simplify for mobile */
+  .constellation {
+    width: 120px;
+    height: 120px;
+    opacity: 0.4;
+  }
+  
+  /* Orbits - make smaller */
+  .orbit-dev circle {
+    r: 200;
+  }
+  
+  .orbit-media circle {
+    r: 250;
+  }
+  
+  .orbit-learn circle {
+    r: 160;
+  }
+  
+  /* Planets - repositioned for mobile */
+  .planets-container {
+    padding: var(--spacing-md);
+  }
+  
+  .planet-dev {
+    top: 15%;
+    left: 10%;
+  }
+  
+  .planet-media {
+    top: 20%;
+    right: 5%;
+  }
+  
+  .planet-learn {
+    bottom: 25%;
+    left: 50%;
+  }
+  
+  /* Planet sizes */
+  .planet-dev .planet-surface {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .planet-media .planet-surface {
+    width: 85px;
+    height: 85px;
+  }
+  
+  .planet-learn .planet-surface {
+    width: 65px;
+    height: 65px;
+  }
+  
+  .planet-icon {
+    font-size: 1.8rem;
+    margin-bottom: 2px;
+  }
+  
+  .planet-media .planet-icon {
+    font-size: 2.2rem;
+  }
+  
+  .planet-learn .planet-icon {
+    font-size: 1.6rem;
+  }
+  
+  .planet-name {
+    font-size: 0.8rem;
+  }
+  
+  /* Planet glows */
+  .planet-dev .planet-glow {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .planet-media .planet-glow {
+    width: 115px;
+    height: 115px;
+  }
+  
+  .planet-learn .planet-glow {
+    width: 95px;
+    height: 95px;
+  }
+  
+  /* Tooltips - adjust for mobile */
+  .planet-tooltip {
+    min-width: 150px;
+    font-size: 0.85rem;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    top: -60px;
+  }
+  
+  .planet-tooltip h3 {
+    font-size: 1rem;
+  }
+  
+  .planet-tooltip p {
+    font-size: 0.8rem;
+  }
+  
+  /* Navigation hint */
+  .navigation-hint {
+    bottom: var(--spacing-md);
+  }
+  
+  .hint-content {
+    font-size: 0.8rem;
+    padding: var(--spacing-xs) var(--spacing-md);
+  }
+  
+  /* Modals */
+  .modal-content {
+    width: 95%;
+    max-height: 90vh;
+    margin: var(--spacing-sm);
+    border-radius: 16px;
+  }
+  
+  .modal-header {
+    padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
+  }
+  
+  .modal-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .modal-icon i {
+    font-size: 2rem;
+  }
+  
+  .modal-title {
+    font-size: 2rem;
+  }
+  
+  .modal-subtitle {
+    font-size: 1rem;
+  }
+  
+  .modal-body {
+    padding: var(--spacing-md);
+  }
+  
+  .modal-description p {
+    font-size: 1rem;
+  }
+  
+  .modal-features {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+  
+  .feature-item {
+    padding: var(--spacing-sm);
+    font-size: 0.9rem;
+  }
+  
+  .modal-actions {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .modal-btn {
+    width: 100%;
+    padding: var(--spacing-md);
+    font-size: 0.9rem;
+  }
+  
+  .modal-close {
+    width: 35px;
+    height: 35px;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    font-size: 1rem;
+  }
+  
+  /* Notification modal */
+  .notify-form {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+  
+  .notify-form h3 {
+    font-size: 1.5rem;
+  }
+  
+  .notify-form p {
+    font-size: 1rem;
+  }
+  
+  /* Social footer */
+  .social-footer {
+    padding: var(--spacing-md);
+  }
+  
+  .social-content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+  
+  .social-section h3 {
+    font-size: 1.1rem;
+  }
+  
+  .social-btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.9rem;
+  }
+  
+  .social-links {
+    gap: var(--spacing-xs);
+  }
+  
+  .social-link {
+    font-size: 0.9rem;
+  }
+  
+  .company-info {
+    font-size: 0.8rem;
+    padding-top: var(--spacing-md);
+  }
+}
+
+/* Small Mobile Styles */
+@media screen and (max-width: 480px) {
+  /* Further reduce sizes for very small screens */
+  .sun-logo {
+    height: 50px;
+  }
+  
+  .sun-title {
+    font-size: clamp(1.5rem, 8vw, 2rem);
+  }
+  
+  .sun-subtitle {
+    font-size: clamp(0.8rem, 4vw, 1rem);
+  }
+  
+  /* Planets */
+  .planet-dev .planet-surface {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .planet-media .planet-surface {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .planet-learn .planet-surface {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .planet-icon {
+    font-size: 1.5rem;
+  }
+  
+  .planet-media .planet-icon {
+    font-size: 1.8rem;
+  }
+  
+  .planet-learn .planet-icon {
+    font-size: 1.3rem;
+  }
+  
+  .planet-name {
+    font-size: 0.7rem;
+  }
+  
+  /* Adjust planet positions */
+  .planet-dev {
+    top: 18%;
+    left: 8%;
+  }
+  
+  .planet-media {
+    top: 22%;
+    right: 3%;
+  }
+  
+  .planet-learn {
+    bottom: 28%;
+  }
+  
+  /* Tooltips */
+  .planet-tooltip {
+    min-width: 130px;
+    font-size: 0.75rem;
+  }
+  
+  .planet-tooltip h3 {
+    font-size: 0.9rem;
+  }
+  
+  .planet-tooltip p {
+    font-size: 0.7rem;
+  }
+  
+  /* Modal adjustments */
+  .modal-title {
+    font-size: 1.8rem;
+  }
+  
+  .modal-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .modal-icon i {
+    font-size: 1.8rem;
+  }
+}
+
+/* Touch-specific styles */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  .planet:hover {
+    transform: scale(1);
+  }
+  
+  /* Make tooltips appear on tap */
+  .planet-tooltip {
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .planet.active .planet-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+  
+  /* Increase touch targets */
+  .planet {
+    padding: var(--spacing-sm);
+  }
+  
+  .modal-close {
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+  }
+  
+  /* Improve button sizes */
+  .modal-btn {
+    min-height: 44px;
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Ensure crisp rendering on retina displays */
+  .sun-logo,
+  .loading-logo-img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Dark mode support (system preference) */
+@media (prefers-color-scheme: dark) {
+  /* Already optimized for dark theme */
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  /* Disable all animations */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  /* Keep essential transitions */
+  .modal-content,
+  .planet-modal,
+  .notification-modal {
+    transition-duration: 0.2s !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .cosmic-container {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .stars-background,
+  .constellations,
+  .orbits-container,
+  .sun-glow,
+  .sun-rays,
+  .planet-glow,
+  .navigation-hint,
+  .social-footer {
+    display: none !important;
+  }
+  
+  .central-sun,
+  .planets-container {
+    position: static !important;
+    transform: none !important;
+  }
+  
+  .planet {
+    position: static !important;
+    display: inline-block !important;
+    margin: 1rem !important;
+  }
+  
+  .modal-content {
+    box-shadow: none !important;
+    border: 2px solid black !important;
+  }
+}
+
+
+
+/* Mobile View Class for JavaScript Control */
+.mobile-view .stars-background,
+.mobile-view .constellations,
+.mobile-view .orbits-container {
+  display: none;
+}
+
+.mobile-view .info-panel {
+  display: none;
+}
+
+.mobile-view .planet.zoomed {
+  transform: none;
+}
+
+/* Enhanced Mobile Styles for New Features */
+@media (max-width: 768px) {
+  .central-sun {
+    transform: translateY(-100px) !important;
+  }
+  
+  .sun-logo {
+    height: 80px;
+  }
+  
+  .sun-title {
+    font-size: 2rem;
+  }
+  
+  .sun-subtitle {
+    font-size: 1rem;
+  }
+  
+  /* Hide desktop-only elements */
+  .info-panel {
+    display: none !important;
+  }
+  
+  .orbits-container {
+    opacity: 0.3;
+  }
+  
+  /* Optimize planet sizes for mobile */
+  .planet {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  
+  .planet-image {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  
+  .planet-glow {
+    width: 100px !important;
+    height: 100px !important;
+  }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+  .central-sun {
+    transform: translateY(-80px) !important;
+  }
+  
+  .sun-logo {
+    height: 60px;
+  }
+  
+  .sun-title {
+    font-size: 1.8rem;
+  }
+  
+  .sun-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .planet {
+    width: 70px !important;
+    height: 70px !important;
+  }
+  
+  .planet-image {
+    width: 70px !important;
+    height: 70px !important;
+  }
+}
+
+/* Performance Optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .planet,
+  .info-panel,
+  .modal-card,
+  .planet-glow,
+  .sun-glow {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .planet-image {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+

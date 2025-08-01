@@ -1,0 +1,328 @@
+/* PalmBit Cosmic Site - Main Styles */
+
+/* CSS Variables */
+:root {
+  /* Colors */
+  --cosmic-bg-start: #0A0F25;
+  --cosmic-bg-end: #121B3A;
+  --star-color: rgba(255, 255, 255, 0.8);
+  --orbit-color: rgba(255, 255, 255, 0.2);
+  
+  /* Planet Colors */
+  --dev-primary: #00F5FF;
+  --dev-secondary: #00C2FF;
+  --media-primary: #B100FF;
+  --media-secondary: #FF00D4;
+  --learn-primary: #FFB100;
+  --learn-secondary: #FF7F00;
+  
+  /* Text Colors */
+  --text-primary: #FFFFFF;
+  --text-secondary: #E0E6F0;
+  --text-muted: rgba(255, 255, 255, 0.7);
+  
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-xxl: 4rem;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  --transition-cosmic: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Shadows */
+  --shadow-glow: 0 0 20px rgba(255, 255, 255, 0.1);
+  --shadow-planet: 0 8px 30px rgba(0, 0, 0, 0.3);
+  
+  /* Z-index layers */
+  --z-background: 1;
+  --z-constellations: 2;
+  --z-orbits: 3;
+  --z-planets: 4;
+  --z-sun: 5;
+  --z-tooltips: 6;
+  --z-modals: 100;
+  --z-loading: 200;
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, var(--cosmic-bg-start) 0%, var(--cosmic-bg-end) 100%);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Loading Screen */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--cosmic-bg-start) 0%, var(--cosmic-bg-end) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-loading);
+  transition: opacity var(--transition-slow), visibility var(--transition-slow);
+}
+
+.loading-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loading-content {
+  text-align: center;
+  max-width: 400px;
+  padding: var(--spacing-lg);
+}
+
+.loading-logo {
+  margin-bottom: var(--spacing-lg);
+}
+
+.loading-logo-img {
+  height: 80px;
+  width: auto;
+  filter: drop-shadow(0 0 20px rgba(0, 168, 255, 0.5));
+  animation: loadingPulse 2s ease-in-out infinite;
+}
+
+.loading-text {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-secondary);
+}
+
+.loading-progress {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loading-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--dev-primary), var(--media-primary), var(--learn-primary));
+  border-radius: 2px;
+  animation: loadingProgress 3s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+  0%, 100% { 
+    transform: scale(1);
+    filter: drop-shadow(0 0 20px rgba(0, 168, 255, 0.5));
+  }
+  50% { 
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 30px rgba(0, 168, 255, 0.8));
+  }
+}
+
+@keyframes loadingProgress {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(0%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Main Cosmic Container */
+.cosmic-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: var(--spacing-sm);
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+p {
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-secondary);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left var(--transition-normal);
+}
+
+.btn:hover:before {
+  left: 100%;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--dev-primary), var(--media-primary));
+  color: var(--text-primary);
+  box-shadow: 0 4px 15px rgba(0, 245, 255, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 245, 255, 0.4);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Utilities */
+.text-center {
+  text-align: center;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--dev-primary), var(--media-primary), var(--learn-primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp var(--transition-cosmic) forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cosmic-bg-start);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--dev-primary), var(--media-primary));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--dev-secondary), var(--media-secondary));
+}
+
+/* Focus Styles for Accessibility */
+*:focus {
+  outline: 2px solid var(--dev-primary);
+  outline-offset: 2px;
+}
+
+button:focus,
+a:focus {
+  outline: 2px solid var(--dev-primary);
+  outline-offset: 2px;
+}
+
+/* Selection Styles */
+::selection {
+  background: var(--dev-primary);
+  color: var(--cosmic-bg-start);
+}
+
+::-moz-selection {
+  background: var(--dev-primary);
+  color: var(--cosmic-bg-start);
+}
+
+/* Print Styles */
+@media print {
+  .cosmic-container {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .stars-background,
+  .constellations,
+  .orbits-container {
+    display: none !important;
+  }
+}
+
+
+/* Hide old social footer - social links now integrated in modals */
+.social-footer {
+  display: none !important;
+}
+
