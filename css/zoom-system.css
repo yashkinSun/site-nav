@@ -24,10 +24,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, 
-    rgba(5, 12, 30, 0.95) 0%, 
-    rgba(10, 20, 40, 0.98) 50%, 
-    rgba(5, 12, 30, 0.95) 100%);
+  background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(20px);
   opacity: 0;
   transition: opacity 0.8s ease;
@@ -372,16 +369,9 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* Hide main content during zoom */
-.zoom-active .central-sun,
-.zoom-active .planets-container,
-.zoom-active .orbits-container,
-.zoom-active .stars-background,
-.zoom-active .constellations,
-.zoom-active .navigation-hint {
-  opacity: 0;
+/* Disable interactions with main content during zoom */
+.zoom-active .cosmic-container {
   pointer-events: none;
-  transition: opacity 0.5s ease;
 }
 
 /* Animations */
@@ -446,7 +436,6 @@
 
 /* Force hide all tooltips and popups during zoom */
 .zoom-active .planet-tooltip,
-.zoom-active .info-panel,
 .zoom-active .popup,
 .zoom-active .dropdown {
   opacity: 0 !important;

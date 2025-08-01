@@ -316,12 +316,6 @@ class ZoomSystem {
       tooltip.style.pointerEvents = 'none';
     });
     
-    // Скрываем информационную панель если она открыта
-    const infoPanel = document.getElementById('info-panel');
-    if (infoPanel) {
-      infoPanel.classList.remove('visible');
-    }
-    
     // Скрываем любые другие всплывающие элементы
     const popups = document.querySelectorAll('.popup, .dropdown, .modal-overlay');
     popups.forEach(popup => {
@@ -347,10 +341,6 @@ class ZoomSystem {
       }
     });
     
-    // Если есть система интерактивных планет, сбрасываем её состояние
-    if (window.interactivePlanetSystem && window.interactivePlanetSystem.closeInfoPanel) {
-      window.interactivePlanetSystem.closeInfoPanel();
-    }
   }
   
   hideOriginalPlanet(planetElement) {

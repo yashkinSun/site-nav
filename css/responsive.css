@@ -589,10 +589,6 @@
   display: none;
 }
 
-.mobile-view .info-panel {
-  display: none;
-}
-
 .mobile-view .planet.zoomed {
   transform: none;
 }
@@ -613,11 +609,6 @@
   
   .sun-subtitle {
     font-size: 1rem;
-  }
-  
-  /* Hide desktop-only elements */
-  .info-panel {
-    display: none !important;
   }
   
   .orbits-container {
@@ -673,7 +664,6 @@
 /* Performance Optimizations */
 @media (prefers-reduced-motion: reduce) {
   .planet,
-  .info-panel,
   .modal-card,
   .planet-glow,
   .sun-glow {

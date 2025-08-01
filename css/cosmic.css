@@ -85,7 +85,7 @@
   opacity: 0;
   animation: sunAppear 2s ease-out forwards;
   animation-delay: 1s;
-  transform: translateY(-300px); /* Увеличено с -150px до -300px */
+  transform: translateY(-150px);
 }
 
 .sun-glow {
