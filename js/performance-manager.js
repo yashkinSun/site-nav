@@ -84,7 +84,6 @@ class PerformanceManager {
     const style = document.createElement('style');
     style.textContent = `
       @media (max-width: 768px) {
-        .info-panel,
         .modal-card {
           backdrop-filter: none !important;
         }
