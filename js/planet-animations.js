@@ -46,7 +46,7 @@ class PlanetAnimations {
     // Mouse events
     element.addEventListener('mouseenter', () => this.handlePlanetHover(planetData, true));
     element.addEventListener('mouseleave', () => this.handlePlanetHover(planetData, false));
-    element.addEventListener('click', () => this.handlePlanetClick(planetData));
+    element.addEventListener('click', (e) => this.handlePlanetClick(e, planetData));
     
     // Touch events for mobile
     if (this.touchDevice) {
@@ -64,13 +64,13 @@ class PlanetAnimations {
       element.addEventListener('touchend', (e) => {
         e.preventDefault();
         const touchDuration = Date.now() - touchStartTime;
-        
+
         // Reset visual feedback
         element.style.transform = '';
-        
+
         // Only trigger if it was a quick tap (not a long press)
         if (touchDuration < 500) {
-          this.handlePlanetTouch(planetData);
+          this.handlePlanetTouch(e, planetData);
         }
       });
       
@@ -84,7 +84,7 @@ class PlanetAnimations {
     element.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        this.handlePlanetClick(planetData);
+        this.handlePlanetClick(e, planetData);
       }
     });
     
@@ -113,27 +113,26 @@ class PlanetAnimations {
     }
   }
   
-  handlePlanetTouch(planetData) {
+  handlePlanetTouch(e, planetData) {
     // On touch devices, directly open modal instead of showing tooltip
-    this.handlePlanetClick(planetData);
+    this.handlePlanetClick(e, planetData);
   }
   
-  handlePlanetClick(planetData) {
+  handlePlanetClick(e, planetData) {
+    e.preventDefault();
+    e.stopPropagation();
+
     // Add click animation
     this.animatePlanetClick(planetData);
-    
-    // Use orbit system for desktop, mobile cards for mobile
+
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    
+
     setTimeout(() => {
       if (isMobile && window.mobileCardSystem) {
-        // Mobile: use card system
         window.mobileCardSystem.openCard(planetData.type);
-      } else if (window.orbitSystem) {
-        // Desktop: use orbit system
-        window.orbitSystem.openOrbitView(planetData.type);
+      } else if (window.zoomSystem) {
+        window.zoomSystem.openZoom(planetData.type, planetData.element);
       } else {
-        // Fallback to modal system
         this.openPlanetModal(planetData.type);
       }
     }, 200);
