@@ -8,6 +8,9 @@ class MobileCardSystem {
     this.isMobile = window.matchMedia('(max-width: 768px)').matches;
     this.currentCard = null;
     this.overlay = null;
+    this.cards = {};
+    this.cardOrder = ['dev', 'media', 'learn'];
+    this.currentIndex = 0;
     
     this.planetData = {
       dev: {
@@ -119,26 +122,23 @@ class MobileCardSystem {
     
     this.showCard(planetType);
   }
-  
+
   showCard(planetType) {
-    const data = this.planetData[planetType];
-    
-    // Close existing card if any
-    if (this.currentCard) {
-      this.closeCard();
+    // Create cards once
+    if (Object.keys(this.cards).length === 0) {
+      this.cardOrder.forEach(type => {
+        const card = this.createCardElement(type, this.planetData[type]);
+        this.bindSwipe(card);
+        document.body.appendChild(card);
+        this.cards[type] = card;
+      });
     }
-    
-    // Create card element
-    this.currentCard = this.createCardElement(planetType, data);
-    document.body.appendChild(this.currentCard);
-    
-    // Show with animation
-    requestAnimationFrame(() => {
-      this.overlay.classList.add('visible');
-      this.currentCard.classList.add('visible');
-    });
+
+    this.overlay.classList.add('visible');
+    this.currentIndex = this.cardOrder.indexOf(planetType);
+    this.updateVisibleCard(true);
   }
-  
+
   createCardElement(planetType, data) {
     const card = document.createElement('div');
     card.className = `modal-card ${planetType}`;
@@ -199,6 +199,83 @@ class MobileCardSystem {
     
     return card;
   }
+
+  bindSwipe(card) {
+    let startX = 0;
+    card.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+    card.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const diff = endX - startX;
+      if (Math.abs(diff) > 50) {
+        if (diff < 0) {
+          this.nextCard();
+        } else {
+          this.prevCard();
+        }
+      }
+    });
+  }
+
+  updateVisibleCard(initial = false) {
+    Object.values(this.cards).forEach(card => {
+      card.classList.remove('visible');
+      card.style.transform = '';
+      card.style.opacity = '';
+    });
+    const currentType = this.cardOrder[this.currentIndex];
+    const card = this.cards[currentType];
+    this.currentCard = card;
+    card.classList.add('visible');
+    if (initial) {
+      return;
+    }
+  }
+
+  nextCard() {
+    if (this.currentIndex >= this.cardOrder.length - 1) return;
+    this.switchCard(this.currentIndex + 1);
+  }
+
+  prevCard() {
+    if (this.currentIndex <= 0) return;
+    this.switchCard(this.currentIndex - 1);
+  }
+
+  switchCard(newIndex) {
+    if (newIndex === this.currentIndex) return;
+    const oldCard = this.cards[this.cardOrder[this.currentIndex]];
+    const newCard = this.cards[this.cardOrder[newIndex]];
+    const dir = newIndex > this.currentIndex ? 1 : -1;
+    const base = 'translate(-50%, -50%)';
+
+    newCard.classList.add('visible');
+    newCard.style.transform = `${base} translateX(${dir * 100}vw) scale(1)`;
+    newCard.style.opacity = '0';
+    newCard.style.pointerEvents = 'auto';
+
+    requestAnimationFrame(() => {
+      oldCard.style.transform = `${base} translateX(${-dir * 100}vw) scale(1)`;
+      oldCard.style.opacity = '0';
+      oldCard.style.pointerEvents = 'none';
+      newCard.style.transform = `${base} translateX(0) scale(1)`;
+      newCard.style.opacity = '1';
+    });
+
+    setTimeout(() => {
+      oldCard.classList.remove('visible');
+      oldCard.style.transform = '';
+      oldCard.style.opacity = '';
+      oldCard.style.pointerEvents = '';
+      newCard.style.transform = '';
+      newCard.style.opacity = '';
+      newCard.style.pointerEvents = '';
+    }, 300);
+
+    this.currentIndex = newIndex;
+    this.currentCard = newCard;
+  }
   
   createPrimaryButton(action) {
     if (action.url) {
@@ -229,18 +306,19 @@ class MobileCardSystem {
   }
   
   closeCard() {
-    if (!this.currentCard) return;
-    
-    // Hide with animation
+    if (Object.keys(this.cards).length === 0) return;
+
     this.overlay.classList.remove('visible');
-    this.currentCard.classList.remove('visible');
-    
-    // Remove after animation
+    Object.values(this.cards).forEach(card => card.classList.remove('visible'));
+
     setTimeout(() => {
-      if (this.currentCard) {
-        document.body.removeChild(this.currentCard);
-        this.currentCard = null;
-      }
+      Object.values(this.cards).forEach(card => {
+        if (card.parentNode) {
+          card.parentNode.removeChild(card);
+        }
+      });
+      this.cards = {};
+      this.currentCard = null;
     }, 300);
   }
   
