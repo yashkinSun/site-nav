@@ -268,8 +268,8 @@ class ZoomSystem {
   }
   
   getOrbitRadius(orbitNumber) {
-    const baseRadius = 150;
-    return baseRadius + (orbitNumber - 1) * 75;
+    const baseRadius = 180;
+    return baseRadius + (orbitNumber - 1) * 82.5;
   }
   
   closeZoom(updateHistory = true) {

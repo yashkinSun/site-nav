@@ -118,7 +118,7 @@
 /* Planet info */
 .zoom-planet-info {
   position: absolute;
-  top: calc(50% + 170px);
+  top: calc(50% - 420px);
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -150,8 +150,8 @@
   left: 50%;
   transform: translate(-50%, -50%) perspective(800px) rotateX(35deg);
   transform-style: preserve-3d;
-  width: 600px;
-  height: 600px;
+  width: 720px;
+  height: 720px;
   opacity: 0;
   transition: opacity 1s ease;
   z-index: 1;
@@ -174,21 +174,21 @@
 }
 
 .zoom-orbit-1 {
-  width: 300px;
-  height: 300px;
+  width: 360px;
+  height: 360px;
   animation-duration: 25s;
 }
 
 .zoom-orbit-2 {
-  width: 450px;
-  height: 450px;
+  width: 525px;
+  height: 525px;
   animation-duration: 35s;
   animation-direction: reverse;
 }
 
 .zoom-orbit-3 {
-  width: 600px;
-  height: 600px;
+  width: 690px;
+  height: 690px;
   animation-duration: 45s;
 }
 
@@ -213,8 +213,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px;
-  height: 600px;
+  width: 720px;
+  height: 720px;
   transform-style: preserve-3d;
 }
 
