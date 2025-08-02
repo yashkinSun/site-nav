@@ -374,15 +374,15 @@ class ZoomSystem {
         <button class="modal-close" aria-label="Close socials"><i class="fas fa-times"></i></button>
         <div class="modal-body">
           <div class="modal-social">
-            <h4>Connect</h4>
+            <h4>Explore our social media</h4>
             <div class="social-links">
               <a href="${data.telegram}" class="social-link" target="_blank">
                 <i class="fab fa-telegram-plane"></i>
-                Bot Navigator
+                Telegram Bot Navigator
               </a>
               <a href="https://instagram.com/${data.instagram.replace('@','')}" class="social-link" target="_blank">
                 <i class="fab fa-instagram"></i>
-                ${data.instagram}
+                Instagram
               </a>
             </div>
           </div>
