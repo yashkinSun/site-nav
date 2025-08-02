@@ -8,6 +8,7 @@ class ZoomSystem {
     this.backButton = null;
     this.isTransitioning = false;
     this.isMobile = window.matchMedia('(max-width: 768px)').matches;
+    this.socialsModal = null;
     
     this.planetData = {
       dev: {
@@ -90,10 +91,10 @@ class ZoomSystem {
           <div class="zoom-planet">
             <img src="" alt="" class="zoom-planet-image">
           </div>
-          <div class="zoom-planet-info">
-            <h2 class="zoom-planet-title"></h2>
-            <p class="zoom-planet-subtitle"></p>
-          </div>
+        </div>
+        <div class="zoom-planet-info">
+          <h2 class="zoom-planet-title"></h2>
+          <p class="zoom-planet-subtitle"></p>
         </div>
         <div class="zoom-orbital-system">
           <div class="zoom-orbit zoom-orbit-1"></div>
@@ -237,7 +238,7 @@ class ZoomSystem {
       const radius = this.getOrbitRadius(item.position.orbit);
       const x = Math.cos(angle * Math.PI / 180) * radius;
       const y = Math.sin(angle * Math.PI / 180) * radius;
-      
+
       label.style.left = `calc(50% + ${x}px)`;
       label.style.top = `calc(50% + ${y}px)`;
       label.style.animationDelay = `${0.5 + index * 0.1}s`;
@@ -267,8 +268,8 @@ class ZoomSystem {
   }
   
   getOrbitRadius(orbitNumber) {
-    const baseRadius = 80;
-    return baseRadius + (orbitNumber - 1) * 60;
+    const baseRadius = 180;
+    return baseRadius + (orbitNumber - 1) * 82.5;
   }
   
   closeZoom(updateHistory = true) {
@@ -316,12 +317,6 @@ class ZoomSystem {
       tooltip.style.pointerEvents = 'none';
     });
     
-    // Скрываем информационную панель если она открыта
-    const infoPanel = document.getElementById('info-panel');
-    if (infoPanel) {
-      infoPanel.classList.remove('visible');
-    }
-    
     // Скрываем любые другие всплывающие элементы
     const popups = document.querySelectorAll('.popup, .dropdown, .modal-overlay');
     popups.forEach(popup => {
@@ -347,10 +342,6 @@ class ZoomSystem {
       }
     });
     
-    // Если есть система интерактивных планет, сбрасываем её состояние
-    if (window.interactivePlanetSystem && window.interactivePlanetSystem.closeInfoPanel) {
-      window.interactivePlanetSystem.closeInfoPanel();
-    }
   }
   
   hideOriginalPlanet(planetElement) {
@@ -360,7 +351,7 @@ class ZoomSystem {
     planetElement.style.transform = 'scale(0.8)';
     planetElement.style.pointerEvents = 'none';
   }
-  
+
   showOriginalPlanet() {
     // Плавно показываем исходную планету обратно
     if (this.currentPlanetElement) {
@@ -370,12 +361,52 @@ class ZoomSystem {
       this.currentPlanetElement.style.pointerEvents = 'auto';
     }
   }
-  
+
   showSocials() {
-    // Показываем социальные сети (можно интегрировать с существующей системой)
-    console.log('Show socials for', this.currentPlanet);
+    if (this.socialsModal) return;
+
+    const data = this.getSocialsData(this.currentPlanet);
+    const modal = document.createElement('div');
+    modal.className = 'planet-modal socials-modal';
+    modal.innerHTML = `
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <button class="modal-close" aria-label="Close socials"><i class="fas fa-times"></i></button>
+        <div class="modal-body">
+          <div class="modal-social">
+            <h3 class="modal-social-title text-gradient">Explore our socials</h3>
+            <div class="social-links">
+              <a href="${data.telegram}" class="social-link" target="_blank">
+                <i class="fab fa-telegram-plane"></i>
+                Telegram Bot Navigator
+              </a>
+              <a href="https://instagram.com/${data.instagram.replace('@','')}" class="social-link" target="_blank">
+                <i class="fab fa-instagram"></i>
+                Instagram
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+    requestAnimationFrame(() => modal.classList.add('active'));
+
+    const close = () => {
+      modal.classList.remove('active');
+      setTimeout(() => {
+        modal.remove();
+        this.socialsModal = null;
+      }, 300);
+    };
+
+    modal.querySelector('.modal-close').addEventListener('click', close);
+    modal.querySelector('.modal-overlay').addEventListener('click', close);
+
+    this.socialsModal = modal;
   }
-  
+
   showNotifyForm() {
     // Показываем форму уведомлений (можно интегрировать с существующей системой)
     if (window.modalSystem) {
@@ -403,6 +434,25 @@ class ZoomSystem {
     this.isActive = false;
     this.currentPlanet = null;
     this.isTransitioning = false;
+  }
+
+  getSocialsData(planetType) {
+    const data = {
+      dev: {
+        telegram: 'https://t.me/PalmBitNavigatorBot',
+        instagram: '@palmbit.dev'
+      },
+      media: {
+        telegram: 'https://t.me/PalmBitNavigatorBot',
+        instagram: '@palmbit.media'
+      },
+      learn: {
+        telegram: 'https://t.me/PalmBitNavigatorBot',
+        instagram: '@palmbit.learn'
+      }
+    };
+
+    return data[planetType] || data.dev;
   }
 }
 
