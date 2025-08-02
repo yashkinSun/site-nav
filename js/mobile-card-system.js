@@ -204,7 +204,7 @@ class MobileCardSystem {
     let startX = 0;
     card.addEventListener('touchstart', (e) => {
       startX = e.touches[0].clientX;
-    });
+    }, { passive: true });
     card.addEventListener('touchend', (e) => {
       const endX = e.changedTouches[0].clientX;
       const diff = endX - startX;
@@ -215,7 +215,7 @@ class MobileCardSystem {
           this.prevCard();
         }
       }
-    });
+    }, { passive: true });
   }
 
   updateVisibleCard(initial = false) {
@@ -255,7 +255,7 @@ class MobileCardSystem {
     newCard.style.opacity = '0';
     newCard.style.pointerEvents = 'auto';
 
-    requestAnimationFrame(() => {
+    performanceManager.limitRAF(() => {
       oldCard.style.transform = `${base} translateX(${-dir * 100}vw) scale(1)`;
       oldCard.style.opacity = '0';
       oldCard.style.pointerEvents = 'none';

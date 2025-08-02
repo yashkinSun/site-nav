@@ -38,7 +38,7 @@ class TouchOptimizations {
       if (e.touches.length > 1) {
         e.preventDefault();
       }
-    });
+    }, { passive: false });
     
     let lastTouchEnd = 0;
     document.addEventListener('touchend', (e) => {
@@ -47,7 +47,7 @@ class TouchOptimizations {
         e.preventDefault();
       }
       lastTouchEnd = now;
-    }, false);
+    }, { passive: false });
   }
   
   optimizeScrolling() {
@@ -169,7 +169,7 @@ class TouchOptimizations {
               closeBtn.click();
             }
           }
-        });
+        }, { passive: true });
       });
     });
   }
@@ -186,17 +186,17 @@ class TouchOptimizations {
       element.style.transform = `scale(${scale})`;
       element.style.backgroundColor = color;
       element.style.transition = `transform ${duration}ms ease, background-color ${duration}ms ease`;
-    });
-    
+    }, { passive: true });
+
     element.addEventListener('touchend', () => {
       element.style.transform = '';
       element.style.backgroundColor = '';
-    });
-    
+    }, { passive: true });
+
     element.addEventListener('touchcancel', () => {
       element.style.transform = '';
       element.style.backgroundColor = '';
-    });
+    }, { passive: true });
   }
   
   optimizeElement(element) {

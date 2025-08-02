@@ -10,6 +10,7 @@ class OptimizedCosmicBackground {
     this.particles = [];
     this.constellations = [];
     this.animationId = null;
+    this.resizeTimeout = null;
     
     // Performance settings
     this.maxParticles = 150;
@@ -185,7 +186,7 @@ class OptimizedCosmicBackground {
       this.lastFrameTime = currentTime;
     }
     
-    this.animationId = requestAnimationFrame((time) => this.animate(time));
+    this.animationId = performanceManager.limitRAF((time) => this.animate(time));
   }
   
   startAnimation() {
@@ -203,11 +204,14 @@ class OptimizedCosmicBackground {
   }
   
   bindEvents() {
-    // Handle resize
+    // Handle resize with throttling
     window.addEventListener('resize', () => {
-      this.resizeCanvas();
-      this.setupParticles();
-      this.setupConstellations();
+      clearTimeout(this.resizeTimeout);
+      this.resizeTimeout = setTimeout(() => {
+        this.resizeCanvas();
+        this.setupParticles();
+        this.setupConstellations();
+      }, 200);
     });
     
     // Handle visibility change

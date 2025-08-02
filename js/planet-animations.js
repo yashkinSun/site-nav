@@ -6,7 +6,9 @@ class PlanetAnimations {
     this.isInitialized = false;
     this.touchDevice = 'ontouchstart' in window;
     this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
+    this.resizeTimeout = null;
+    this.floatingAnimationId = null;
+
     this.init();
   }
   
@@ -55,12 +57,12 @@ class PlanetAnimations {
       element.addEventListener('touchstart', (e) => {
         e.preventDefault();
         touchStartTime = Date.now();
-        
+
         // Add immediate visual feedback
         element.style.transform = 'scale(1.05)';
         element.style.transition = 'transform 0.1s ease';
-      });
-      
+      }, { passive: false });
+
       element.addEventListener('touchend', (e) => {
         e.preventDefault();
         const touchDuration = Date.now() - touchStartTime;
@@ -72,12 +74,12 @@ class PlanetAnimations {
         if (touchDuration < 500) {
           this.handlePlanetTouch(e, planetData);
         }
-      });
-      
-      element.addEventListener('touchcancel', (e) => {
+      }, { passive: false });
+
+      element.addEventListener('touchcancel', () => {
         // Reset visual feedback on cancel
         element.style.transform = '';
-      });
+      }, { passive: true });
     }
     
     // Keyboard accessibility
@@ -150,52 +152,28 @@ class PlanetAnimations {
   
   showPlanetTooltip(planetData) {
     if (!planetData.tooltip) return;
-    
+
     planetData.isActive = true;
     planetData.element.classList.add('active');
-    
-    // Animate tooltip appearance
-    planetData.tooltip.style.opacity = '0';
-    planetData.tooltip.style.visibility = 'visible';
-    planetData.tooltip.style.transform = 'translateX(-50%) translateY(10px)';
-    
-    // Use requestAnimationFrame for smooth animation
-    requestAnimationFrame(() => {
-      planetData.tooltip.style.transition = 'all 0.3s ease';
-      planetData.tooltip.style.opacity = '1';
-      planetData.tooltip.style.transform = 'translateX(-50%) translateY(0)';
-    });
+    planetData.tooltip.classList.add('tooltip-visible');
   }
-  
+
   hidePlanetTooltip(planetData) {
     if (!planetData.tooltip) return;
-    
+
     planetData.isActive = false;
     planetData.element.classList.remove('active');
-    
-    planetData.tooltip.style.transition = 'all 0.3s ease';
-    planetData.tooltip.style.opacity = '0';
-    planetData.tooltip.style.transform = 'translateX(-50%) translateY(10px)';
-    
-    setTimeout(() => {
-      planetData.tooltip.style.visibility = 'hidden';
-    }, 300);
+    planetData.tooltip.classList.remove('tooltip-visible');
   }
-  
+
   enhancePlanetGlow(planetData) {
     if (!planetData.glow || this.reducedMotion) return;
-    
-    planetData.glow.style.transition = 'all 0.3s ease';
-    planetData.glow.style.opacity = '1';
-    planetData.glow.style.transform = 'translate(-50%, -50%) scale(1.2)';
+    planetData.glow.classList.add('glow-active');
   }
-  
+
   normalPlanetGlow(planetData) {
     if (!planetData.glow || this.reducedMotion) return;
-    
-    planetData.glow.style.transition = 'all 0.3s ease';
-    planetData.glow.style.opacity = '0';
-    planetData.glow.style.transform = 'translate(-50%, -50%) scale(1)';
+    planetData.glow.classList.remove('glow-active');
   }
   
   animatePlanetClick(planetData) {
@@ -240,41 +218,20 @@ class PlanetAnimations {
   
   startAnimations() {
     if (this.reducedMotion) return;
-    
-    // Add floating animation to planets
-    this.planets.forEach((planetData, index) => {
-      this.addFloatingAnimation(planetData, index);
-    });
+    this.animateFloating();
   }
-  
-  addFloatingAnimation(planetData, index) {
-    if (this.reducedMotion) return;
-    
-    const { element } = planetData;
-    const delay = index * 0.5; // Stagger animations
-    
-    // Create subtle floating motion
-    const animate = () => {
-      if (planetData.isHovered || planetData.isActive) {
-        requestAnimationFrame(animate);
-        return;
+
+  animateFloating(time = 0) {
+    const t = time * 0.001;
+    this.planets.forEach(planetData => {
+      if (planetData.isHovered || planetData.isActive) return;
+      const offsetX = Math.sin(t * 0.5 + planetData.animationOffset) * 3;
+      const offsetY = Math.cos(t * 0.3 + planetData.animationOffset) * 2;
+      if (!planetData.element.style.transform.includes('scale')) {
+        planetData.element.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
       }
-      
-      const time = Date.now() * 0.001;
-      const offsetX = Math.sin(time * 0.5 + planetData.animationOffset) * 3;
-      const offsetY = Math.cos(time * 0.3 + planetData.animationOffset) * 2;
-      
-      if (!element.style.transform.includes('scale')) {
-        element.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-      }
-      
-      requestAnimationFrame(animate);
-    };
-    
-    // Start animation after delay
-    setTimeout(() => {
-      animate();
-    }, delay * 1000);
+    });
+    this.floatingAnimationId = performanceManager.limitRAF((ts) => this.animateFloating(ts));
   }
   
   // Intersection Observer for performance
@@ -308,9 +265,12 @@ class PlanetAnimations {
   }
   
   bindEvents() {
-    // Handle window resize
+    // Handle window resize with throttling
     window.addEventListener('resize', () => {
-      this.handleResize();
+      clearTimeout(this.resizeTimeout);
+      this.resizeTimeout = setTimeout(() => {
+        this.handleResize();
+      }, 200);
     });
     
     // Handle orientation change on mobile
@@ -334,7 +294,12 @@ class PlanetAnimations {
       planetData.element.style.animation = 'none';
       planetData.element.style.transform = '';
     });
-    
+
+    if (this.floatingAnimationId) {
+      cancelAnimationFrame(this.floatingAnimationId);
+      this.floatingAnimationId = null;
+    }
+
     this.planets = [];
     this.isInitialized = false;
   }

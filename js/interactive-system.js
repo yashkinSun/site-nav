@@ -153,7 +153,7 @@ class InteractivePlanetSystem {
     });
     
     // Show panel with animation
-    requestAnimationFrame(() => {
+    performanceManager.limitRAF(() => {
       this.infoPanel.classList.add('visible');
     });
   }

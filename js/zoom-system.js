@@ -176,8 +176,6 @@ class ZoomSystem {
     // Скрываем исходную планету для эффекта погружения
     this.hideOriginalPlanet(planetElement);
     
-    // Получаем позицию планеты для анимации
-    const planetRect = planetElement.getBoundingClientRect();
     const planetImage = planetElement.querySelector('.planet-image');
     
     // Настраиваем контент
@@ -191,7 +189,7 @@ class ZoomSystem {
     document.body.classList.add('zoom-active');
     
     // Анимация появления
-    requestAnimationFrame(() => {
+    performanceManager.limitRAF(() => {
       this.zoomContainer.classList.add('active');
       this.isActive = true;
       
@@ -391,7 +389,7 @@ class ZoomSystem {
     `;
 
     document.body.appendChild(modal);
-    requestAnimationFrame(() => modal.classList.add('active'));
+    performanceManager.limitRAF(() => modal.classList.add('active'));
 
     const close = () => {
       modal.classList.remove('active');

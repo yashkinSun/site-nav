@@ -11,7 +11,9 @@ class PerformanceManager {
     this.isVisible = !document.hidden;
     this.frameRate = this.isMobile ? 20 : 30;
     this.particleCount = this.isMobile ? 50 : 150;
-    
+    this.originalRAF = window.requestAnimationFrame.bind(window);
+    this.lastRAFTime = 0;
+
     this.init();
   }
   
@@ -20,7 +22,6 @@ class PerformanceManager {
     this.setupVisibilityListener();
     this.setupReducedMotionListener();
     this.optimizeForDevice();
-    this.throttleAnimations();
   }
   
   detectDeviceCapabilities() {
@@ -139,20 +140,17 @@ class PerformanceManager {
     document.head.appendChild(style);
   }
   
-  throttleAnimations() {
-    // Throttle requestAnimationFrame calls
-    let lastTime = 0;
+  limitRAF(callback) {
     const targetInterval = 1000 / this.frameRate;
-    
-    const originalRAF = window.requestAnimationFrame;
-    window.requestAnimationFrame = (callback) => {
-      return originalRAF((currentTime) => {
-        if (currentTime - lastTime >= targetInterval) {
-          lastTime = currentTime;
-          callback(currentTime);
-        }
-      });
+    const tick = (time) => {
+      if (time - this.lastRAFTime >= targetInterval) {
+        this.lastRAFTime = time;
+        callback(time);
+      } else {
+        this.originalRAF(tick);
+      }
     };
+    return this.originalRAF(tick);
   }
   
   notifyVisibilityChange() {

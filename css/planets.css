@@ -50,7 +50,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1);
   border-radius: 50%;
   opacity: 0;
   transition: all var(--transition-normal);
@@ -58,8 +58,9 @@
   box-shadow: 0 0 30px rgba(74, 158, 255, 0.6);
 }
 
-.planet:hover .planet-glow {
+.planet-glow.glow-active {
   opacity: 1;
+  transform: translate(-50%, -50%) scale(1.2);
 }
 
 /* Planet Surface */
@@ -121,11 +122,12 @@
 }
 
 /* Planet Tooltips */
+
 .planet-tooltip {
   position: absolute;
   top: -90px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(10px);
   background: rgba(0, 0, 0, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 12px;
@@ -134,8 +136,6 @@
   max-width: 280px;
   text-align: center;
   opacity: 0;
-  visibility: hidden;
-  transform: translateX(-50%) translateY(10px);
   transition: all var(--transition-normal);
   backdrop-filter: blur(20px);
   z-index: calc(var(--z-tooltips) + 10);
@@ -154,10 +154,10 @@
   border-top-color: rgba(0, 0, 0, 0.95);
 }
 
-.planet:hover .planet-tooltip {
+.planet-tooltip.tooltip-visible {
   opacity: 1;
-  visibility: visible;
   transform: translateX(-50%) translateY(-5px);
+  pointer-events: auto;
 }
 
 .tooltip-content {
@@ -389,11 +389,7 @@
   outline-offset: 4px;
 }
 
-.planet:focus .planet-tooltip {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-}
+
 
 /* Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {

@@ -87,7 +87,7 @@ class CosmicBackground {
         this.mouseX = (touch.clientX - window.innerWidth / 2) * this.parallaxFactor;
         this.mouseY = (touch.clientY - window.innerHeight / 2) * this.parallaxFactor;
       }
-    });
+    }, { passive: true });
     
     // Device orientation for mobile parallax
     if (window.DeviceOrientationEvent) {
@@ -103,7 +103,7 @@ class CosmicBackground {
     this.updateStars();
     this.drawStars();
     
-    this.animationId = requestAnimationFrame(() => this.animate());
+    this.animationId = performanceManager.limitRAF(() => this.animate());
   }
   
   clear() {
