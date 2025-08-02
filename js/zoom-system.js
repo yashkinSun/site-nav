@@ -374,7 +374,7 @@ class ZoomSystem {
         <button class="modal-close" aria-label="Close socials"><i class="fas fa-times"></i></button>
         <div class="modal-body">
           <div class="modal-social">
-            <h4>Explore our social media</h4>
+            <h3 class="modal-social-title text-gradient">Explore our socials</h3>
             <div class="social-links">
               <a href="${data.telegram}" class="social-link" target="_blank">
                 <i class="fab fa-telegram-plane"></i>
