@@ -149,16 +149,25 @@
 .zoom-container.dev .zoom-planet-title,
 .zoom-container.dev .zoom-planet-subtitle {
   background: linear-gradient(135deg, #00f5ff, #00b4c8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .zoom-container.media .zoom-planet-title,
 .zoom-container.media .zoom-planet-subtitle {
   background: linear-gradient(135deg, #b100ff, #6d00b3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .zoom-container.learn .zoom-planet-title,
 .zoom-container.learn .zoom-planet-subtitle {
   background: linear-gradient(135deg, #ffb100, #ff6b00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* Orbital system */

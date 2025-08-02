@@ -532,26 +532,13 @@
 /* Modal Social Links */
 .modal-social {
   margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.modal-social .social-section {
-  margin-bottom: 1.5rem;
-}
-
-.modal-social .social-section:last-child {
-  margin-bottom: 0;
-}
-
-.modal-social h4 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-  color: rgba(255, 255, 255, 0.9);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.modal-social-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 .modal-social .social-btn {
@@ -579,6 +566,9 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.5rem;
+  justify-content: center;
 }
 
 .modal-social .social-link {
@@ -609,9 +599,8 @@
 @media (max-width: 768px) {
   .modal-social {
     margin-top: 1.5rem;
-    padding-top: 1.5rem;
   }
-  
+
   .modal-social .social-btn {
     padding: 0.6rem 1.2rem;
     font-size: 0.85rem;
@@ -624,6 +613,7 @@
   
   .modal-social .social-links {
     gap: 0.5rem;
+    padding-top: 1rem;
   }
 }
 
